@@ -11,13 +11,12 @@ function lapTime = lapSeparate (gps,finishLine)
 % gps is a matrix containing GPS data with columns [latitude, longitude, altitude, time]
 % finishLine is a 2-element row vector containing the latitude and longitude coordinates of the finish line
 
-    lapTime = [];   
+    lapTime = [];
     lastCrossingTime = -inf;
     lastCrossingDistance = inf;
     for i = 1:size(gps, 1)
         distToFinish = lldistkm(gps(i, 1:2), finishLine);
-        disp(distToFinish)
-        if distToFinish < 0.03 % adjust threshold as necessary (kms)
+        if distToFinish < 0.01 % adjust threshold as necessary (kms)
             if (gps(i, 4) - lastCrossingTime) > 10 % max time between two GPS points till considered different laps
                 lapTime(end+1) = gps(i, 4); % add the time of the current GPS point to lapTime
                 lastCrossingDistance = distToFinish;

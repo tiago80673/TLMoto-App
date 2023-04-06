@@ -14,6 +14,7 @@ function lap = lapOrganize(lapTime,battery,controller,gps,susp,temp)
     
  % Serve para mostrar qual o tipo da variavel lap.battery 
     lap(1).battery = battery;
+    disp(lapTime);
     lap(1).battery.assembly = battery.assembly(battery.assembly(:,9)<lapTime(1),:);
     lap(1).battery.pack1 = battery.pack1(battery.pack1(:,9)<lapTime(1),:);
     lap(1).battery.pack2 = battery.pack2(battery.pack2(:,9)<lapTime(1),:);
