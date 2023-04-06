@@ -1,0 +1,5 @@
+limpar o startupfnc
+limpar lista de ficheiros apos processar
+
+implementar 3 graficos ao mesmo tempo
+implementar melhor maneira de escolher meta
