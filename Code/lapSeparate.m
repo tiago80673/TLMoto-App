@@ -1,6 +1,6 @@
 % A função retorna um vector com a primeira coordenada de cada nova volta
 
-function lapTime = lapSeparate (gps,finishLine)
+function lapTime = lapSeparate (gps,finishLine,threshold)
 %   Exemplo: Ficheiro 'Primeira_Saida.txt' ---> Kartodromo de Kiro 
 %   Meta - > 39.26642438391545, -9.188870809998459
 %             39.26641140518718, -9.188762851087874
@@ -10,6 +10,10 @@ function lapTime = lapSeparate (gps,finishLine)
 
 % gps is a matrix containing GPS data with columns [latitude, longitude, altitude, time]
 % finishLine is a 2-element row vector containing the latitude and longitude coordinates of the finish line
+    if nargin < 3
+        % Default threshold value
+        threshold = 0.03; % in meters
+    end
 
     lapTime = [];   
     lastCrossingTime = -inf;
@@ -17,7 +21,7 @@ function lapTime = lapSeparate (gps,finishLine)
     for i = 1:size(gps, 1)
         distToFinish = lldistkm(gps(i, 1:2), finishLine);
         disp(distToFinish)
-        if distToFinish < 0.03 % adjust threshold as necessary (kms)
+        if distToFinish < threshold % adjust threshold as necessary (kms)
             if (gps(i, 4) - lastCrossingTime) > 10 % max time between two GPS points till considered different laps
                 lapTime(end+1) = gps(i, 4); % add the time of the current GPS point to lapTime
                 lastCrossingDistance = distToFinish;
