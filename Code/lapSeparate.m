@@ -12,7 +12,7 @@ function lapTime = lapSeparate (gps,finishLine,threshold)
 % finishLine is a 2-element row vector containing the latitude and longitude coordinates of the finish line
     if nargin < 3
         % Default threshold value
-        threshold = 0.03; % in meters
+        threshold = 0.015; % in meters
     end
 
     lapTime = [];   
